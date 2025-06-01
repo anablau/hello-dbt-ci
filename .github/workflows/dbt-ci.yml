@@ -27,8 +27,10 @@ jobs:
           pip install dbt-duckdb
 
       - name: Run dbt
-        run: |
-          source .venv/bin/activate
-          dbt deps
-          dbt build --project-dir . --profiles-dir .
+      run: |
+        source .venv/bin/activate
+        mkdir -p ~/.dbt
+        cp profiles.yml ~/.dbt/profiles.yml   # 👈 make sure it's in the right place
+        dbt deps
+        dbt build
 
